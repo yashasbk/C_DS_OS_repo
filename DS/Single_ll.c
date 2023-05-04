@@ -175,14 +175,17 @@ void delete_alternate_node(sll **head)
     }
     else
     {
-        sll *prev,*next;
-        prev =  *head;
-        while(prev != NULL)
+        sll *prev = *head;
+        sll *next = (*head)->next;
+        while (prev != NULL && next != NULL)
         {
-            next = prev->next;
             prev->next = next->next;
             free(next);
             prev = prev->next;
+            if (prev != NULL)
+            {
+                next = prev->next;
+            }
         }
     }
 }
@@ -197,7 +200,7 @@ int main()
     {
         printf("What do you want to do:\n1)Add node at first\n2)Add node at last\n3)Delete node at first\n"
         "4)Delete node at last\n5)Display data in nodes\n6)Reverse LL\n"
-        "7)Revese link\n8)Delete Alternative node\n9)length of ll\nq)Exit\n");
+        "7)Revese next\n8)Delete Alternative node\n9)length of ll\nq)Exit\n");
         input = getchar();
         while ((c = getchar()) != '\n' && c != EOF);
         switch(input)
